@@ -1,0 +1,50 @@
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+
+#control-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#control-panel > .param {
+    display: flex;
+    margin: 10px 0px;
+}
+
+#control-panel > .param > label {
+    width: 220px;
+    text-align: right;
+    padding: 0 20px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    cursor: default;
+}
+
+#control-panel > .param > input[type='range'] {
+    width: 100%;
+    text-align: center;
+}
+
+#control-panel > .param > select {
+  flex: 0 0 40%;
+  width: 100%;
+  text-align: center;
+}
+
+#control-panel > .param > output {
+  flex: 1;
+  text-align: left;
+  padding: 0 20px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  cursor: default;
+}
+
+footer {
+    padding: 10px;
+    text-align: center;
+    color: #AAAAAA;
+    background: #1a242f;
+}

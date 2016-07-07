@@ -1,4 +1,4 @@
-<!-- example from http://homepage.tudelft.nl/19j49/tsnejs/ 
+ <!-- example from http://homepage.tudelft.nl/19j49/tsnejs/ 
 test.html?key=1pzwqc7L1aVuYXSkPkn-9tbBhJ0uPhwwfn_-7WMZJ30o # RNA-seq counts
 -->
 
@@ -18,15 +18,43 @@ test.html?key=1pzwqc7L1aVuYXSkPkn-9tbBhJ0uPhwwfn_-7WMZJ30o # RNA-seq counts
     <script src="http://homepage.tudelft.nl/19j49/tsnejs/js/StackBlur.js"></script>
     <script src="http://homepage.tudelft.nl/19j49/tsnejs/js/html2canvas.js"></script>
     <script src="http://homepage.tudelft.nl/19j49/tsnejs/js/canvg.js"></script>
-    <script src="tsne_counts.js"></script>
-    <script src="http://homepage.tudelft.nl/19j49/tsnejs/js/tsne_vis.js"></script>
+    <script src="js/tsne.js"></script>
+    <script src="js/tsne_vis.js"></script>
   </head>
 
   <body>
 
     <div id="embed"></div>
-    <p class="perplexity_text" id="perplexity_text">Perplexity: <div id="perplexity_slider"></div><br />
-    </p>
+    
+    <p class="perplexity_text" id="perplexity_text">Perplexity: <div id="perplexity_slider"></div></p>
+
+    <br/>
+    
+    Transform:
+    <form>
+      <select id="transform">
+	<!-- value must be function name -->
+	<option value="noTrans">none</option>
+	<option value="logTrans">log</option>
+	<option value="asinhTrans">asinh</option>
+	<option value="binarizeTrans">binarize</option>
+      </select>
+    </form>
+
+    <br/>
+
+    Distance metric:
+    <form>
+      <select id="distance">
+	<!-- value must be function name -->
+	<option value="euclideanDist">Euclidean</option>
+	<option value="jaccardDist">Jaccard</option>
+	<option value="fooBar">FooBar</option>
+      </select>
+    </form>
+
+    <p><button id="exportButton" onclick="exportMapToImage();" disabled>Export map to image</button>
+    </p><br />
     
   </body>
 </html>
