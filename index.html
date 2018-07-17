@@ -42,7 +42,28 @@
 			</div>
 			<div class="panel-body">
 			    <p><a href="http://lvdmaaten.github.io/tsne/" target="_blank">t-SNE</a> is a popular dimensionality reduction method for, among many other things, identifying transcriptional subpopulations from single-cell RNA-seq data. However, the sensitivities of results to and the appropriateness of different parameters used have not been thoroughly investigated. Building on <a href="https://github.com/karpathy/tsnejs" target="_blank">previously developed Javascript-based implementations of the t-SNE algorithm</a>, we present this user-friendly web tool to begin to interactively explore the impact of these parameters on identified subpopulations.
+			    </p>
+			    
+			    <hr>
+			    
+ 			    <h4>Usage Instructions</h4>
+			    <p>
+				To use your own data, paste your data into the datatable in the format shown with the sample demo data. Specifically, your data must be arranged with cells as rows and genes as columns in order to cluster on the cells. The first row of the datatable will be used as a header. Data values inputted into the first row will be disregarded. Similarly, the first two columns of the datatable will be used as cell names and cell annotations (to color the tSNE plot). If cell annotations are not available, this column can be kept empty. Data values inputted into the first two columns will be disregarded. All other entries must be numeric as they are assumed to be gene expression values.
+				<br><br>
+				Non-numeric entries such as NAs and Infs will result in errors.
+				<br><br>
+				You can <b>Ctrl-A</b> and <b>Delete</b> the datatable to clear the current sample demo data prior to pasting in your own data. 
+			    </p>
+
+			    <hr>
+			    
+ 			    <h4>Troubleshooting</h4>
+			    <p>
+				Error messages are available in <a href="https://developers.google.com/web/tools/chrome-devtools/console/">the web console</a>. 
+			    </p>
+
 			</div>
+			
 		    </div>
 		</div>
 	    </div>
