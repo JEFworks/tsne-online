@@ -63,11 +63,12 @@
 				<br><br>
 				This webtool <a href="https://en.wikipedia.org/wiki/Client-side">runs using your own computer's memory</a>. In order to avoid crashing your own browser, please do not use this webtool with large datasets. Datasets should be subsetted to fewer than 100 genes AND fewer than 500 cells if possible. For more substantial analyses, please consult a bioinformatics collaborator. 
 			    </p>
-
+			    
 			    <hr>
 			    
 			    <h4>Disclaimer</h4>
 			    <p>THE WEBTOOL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE WEBTOOL OR THE USE OR OTHER DEALINGS IN THE WEBTOOL.</p>
+
 			</div>
 			
 		    </div>
@@ -81,7 +82,7 @@
 			<div class="panel-heading">
  			    <h3 class="panel-title">Data <i>(small sample dataset from <a href="http://www.ncbi.nlm.nih.gov/pubmed/25700174" target="_blank">Zeisel et al.</a>)</i></h3>
 			</div>
-			<div class="panel-body" style="height:350px; overflow: scroll">
+			<div class="panel-body" style="height:360px; overflow: scroll">
 			    <div id="incsv" class="hot handsontable"></div>
 			</div>
 		    </div>
@@ -91,7 +92,7 @@
 			<div class="panel-heading">
  			    <h3 class="panel-title">Parameters</h3>
 			</div>
-			<div class="panel-body" style="height:350px; overflow: scroll">
+			<div class="panel-body" style="height:360px; overflow: scroll">
 			<div id="control-panel" data-sr="enter left over 8s">
 			    <div class="param">
 				<label for="param-perplexity">Perplexity</label>
@@ -127,8 +128,13 @@
 				<output for="param-transform" id="param-transform-value"></output>
 			    </div>
 
-			    <p><div id="run-button"><button class="btn btn-primary btn-block" onclick="init(getData());">Run</button></div></p>
-
+			    <div class="row">
+			      <div class="col-md-6">
+				<p><div id="run-button"><button class="btn btn-primary btn-block" onclick="init(getData());">Run</button></div></p>
+			      </div>
+			      <div class="col-md-6">
+				<p><div id="save-button"><button class="btn btn-primary btn-block" onclick="downloadSvg();">Export Image</button></div></p>
+			      </div>
 			    <div id="cost"></div>
 
 			</div>
@@ -169,6 +175,35 @@
    $('#param-learningrate').bind('input', function () { $('#param-learningrate-value').text($('#param-learningrate').val()); });
    $('#param-maxiter').bind('input', function () { $('#param-maxiter-value').text($('#param-maxiter').val()); });
 
+   function downloadSvg() {
+// Download sag courtesy of https://stackoverflow.com/questions/23218174/how-do-i-save-export-an-svg-file-after-creating-an-svg-with-d3-js-ie-safari-an
+
+svg = document.getElementById('embed').firstElementChild
+var serializer = new XMLSerializer();
+var source = serializer.serializeToString(svg);
+
+//add name spaces.
+if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+    source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+}
+if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
+    source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+}
+
+//add xml declaration
+source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+//convert svg source to URI data scheme.
+var svgUrl = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
+
+var downloadLink = document.createElement("a");
+downloadLink.href = svgUrl;
+downloadLink.download = "newesttree.svg";
+document.body.appendChild(downloadLink);
+downloadLink.click();
+document.body.removeChild(downloadLink);
+   }
+   
   </script>
 
   <!-- load later -->
