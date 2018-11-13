@@ -14,27 +14,36 @@ $(document).ready(function() {
 function getData() {
     var rawData = [];
 
-    var colNames = dataInit[0]
-    for(var i = 1; i < dataInit.length;i++) {
-	row = dataInit[i]
-	var dataPoint = {};
-	dataPoint['name'] = row[0];
-	dataPoint['label'] = row[1];
-	for(var j = 2; j < row.length; j++) {
-	    if(row[j].length !== 0) {
-		if(row[j] != "") {
-		    //dataPoint.push({name:colNames[j].trim().toUpperCase(),value: parseFloat(row[j])});
-		    //dataPoint.push(parseFloat(row[j]));
-		    dataPoint[j]=parseFloat(row[j]);
-		     
+    var colNames = dataInit[0].filter(function (el) {
+	return el != '';
+    });
+
+    // max 10000 cells due to memory concerns
+    for(var i = 1; i < dataInit.length; i++) {
+	row = dataInit[i].filter(function (el) {
+	    return el != '';
+	});
+
+	if(row.length !== 0) {
+	    var dataPoint = {};
+	    dataPoint['name'] = row[0];
+	    dataPoint['label'] = row[1];
+	    for(var j = 2; j < row.length; j++) {
+		if(row[j].length !== 0) {
+		    if(row[j] != "") {
+			//dataPoint.push({name:colNames[j].trim().toUpperCase(),value: parseFloat(row[j])});
+			//dataPoint.push(parseFloat(row[j]));
+			dataPoint[j]=parseFloat(row[j]);
+			
+		    }
 		}
 	    }
-	}
-	if(dataPoint.length !== 0) {
-	    rawData.push(dataPoint);
+	    if(dataPoint.length !== 0) {
+		rawData.push(dataPoint);
+	    }
 	}
     }
-
+    
     return(rawData)
 }
 
